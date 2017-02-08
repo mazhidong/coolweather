@@ -28,7 +28,7 @@ public class CoolWeatherDB {
         db = coolWeatherOpenHelper.getWritableDatabase();
     }
 
-    public synchronized CoolWeatherDB getInstance(Context context){
+    public synchronized static CoolWeatherDB getInstance(Context context){
         if (coolWeatherDB == null) {
             coolWeatherDB = new CoolWeatherDB(context);
         }
@@ -50,7 +50,7 @@ public class CoolWeatherDB {
                 Province province = new Province();
                 province.setId(cursor.getInt(cursor.getColumnIndex("id")));
                 province.setProvinceName(cursor.getString(cursor.getColumnIndex("province_name")));
-                province.setProvinceCode(cursor.getString(cursor.getColumnIndex("provincce_code")));
+                province.setProvinceCode(cursor.getString(cursor.getColumnIndex("province_code")));
                 list.add(province);
             } while (cursor.moveToNext());
         }
@@ -65,16 +65,16 @@ public class CoolWeatherDB {
         db.insert("City", null, values);
     }
 
-    public List<City> loadCitys() {
+    public List<City> loadCitys(int provinceId) {
         List<City> list = new ArrayList<City>();
-        Cursor cursor = db.query("City",null,null,null,null,null,null);
+        Cursor cursor = db.query("City",null,"province_id=?",new String[]{String.valueOf(provinceId)},null,null,null);
         if(cursor.moveToFirst()){
             do {
                 City city = new City();
                 city.setId(cursor.getInt(cursor.getColumnIndex("id")));
                 city.setCityName(cursor.getString(cursor.getColumnIndex("city_name")));
                 city.setCityCode(cursor.getString(cursor.getColumnIndex("city_code")));
-                city.setProvinceID(cursor.getInt(cursor.getColumnIndex("provincce_id")));
+                city.setProvinceID(cursor.getInt(cursor.getColumnIndex("province_id")));
                 list.add(city);
             } while (cursor.moveToNext());
         }
@@ -89,9 +89,9 @@ public class CoolWeatherDB {
         db.insert("Country", null, values);
     }
 
-    public List<Country> loadCountrys() {
+    public List<Country> loadCountrys(int cityId) {
         List<Country> list = new ArrayList<Country>();
-        Cursor cursor = db.query("Country",null,null,null,null,null,null);
+        Cursor cursor = db.query("Country",null,"city_id=?",new String[]{String.valueOf(cityId)},null,null,null);
         if(cursor.moveToFirst()){
             do {
                 Country country = new Country();
