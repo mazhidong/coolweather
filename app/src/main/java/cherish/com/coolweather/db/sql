@@ -1,0 +1,16 @@
+CREATE TABLE Province(
+id integer PRIMARY KEY AUTOINCREMENT,
+province_name text,
+province_code text)
+
+CREATE TABLE City(
+id integer PRIMARY KEY AUTOINCREMENT,
+city_name text,
+city_code text,
+province_id integer)
+
+CREATE TABLE Country(
+id integer PRIMARY KEY AUTOINCREMENT,
+country_name text,
+country_code text,
+city_id integer)
