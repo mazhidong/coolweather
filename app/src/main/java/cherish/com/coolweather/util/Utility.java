@@ -3,6 +3,7 @@ package cherish.com.coolweather.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -102,7 +103,13 @@ public class Utility {
     public static void saveWeatherInfo(Context context, String cityName, String weatherCode, String temp1, String temp2, String weather,
                                        String ptime,String img1,String img2) {
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);
+        if (Build.VERSION.SDK_INT >= 23) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);
+            editor.putString("current_date", sdf.format(new Date()));
+        } else {
+            editor.putString("current_date", "");
+        }
+
         editor.putBoolean("city_selected", true);
         editor.putString("city_name", cityName);
         editor.putString("weather_code", weatherCode);
@@ -112,7 +119,8 @@ public class Utility {
         editor.putString("ptime", ptime);
         editor.putString("img1", img1);
         editor.putString("img2", img2);
-        editor.putString("current_date", sdf.format(new Date()));
         editor.commit();
     }
+
+
 }

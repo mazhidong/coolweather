@@ -52,14 +52,6 @@
             android:orientation="vertical"
             android:layout_centerInParent="true">
             <TextView
-                android:id="@+id/current_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="#fff"
-                android:textSize="18sp"
-                android:padding="10dp"/>
-            <TextView
                 android:id="@+id/weather"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -104,17 +96,26 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:id="@+id/img1"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="20dp"
+
                     />
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="40dp"
                     android:id="@+id/img2"/>
             </LinearLayout>
         </LinearLayout>
+        <TextView
+            android:id="@+id/current_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:padding="10dp"/>
     </RelativeLayout>
 </LinearLayout>
