@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import cherish.com.coolweather.R;
+import cherish.com.coolweather.service.AutoUpdateService;
 import cherish.com.coolweather.util.HttpCallbackListener;
 import cherish.com.coolweather.util.HttpUtil;
 import cherish.com.coolweather.util.Utility;
@@ -113,6 +114,8 @@ public class WeatherActivity extends Activity implements View.OnClickListener{
         weatherText.setText(sharedPreferences.getString("weather",""));
         weatherInfoLayout.setVisibility(View.VISIBLE);
         cityNameText.setVisibility(View.VISIBLE);
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 
     @Override
