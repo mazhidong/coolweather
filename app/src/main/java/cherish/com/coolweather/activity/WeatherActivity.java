@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -29,6 +30,8 @@ public class WeatherActivity extends Activity implements View.OnClickListener{
     private TextView weatherText;
     private Button switchCity;
     private Button refreshWeather;
+    private ImageView img1;
+    private ImageView img2;
 
 
     @Override
@@ -47,6 +50,8 @@ public class WeatherActivity extends Activity implements View.OnClickListener{
         temp1Text = (TextView) findViewById(R.id.temp1);
         temp2Text = (TextView) findViewById(R.id.temp2);
         weatherText = (TextView) findViewById(R.id.weather);
+        img1 = (ImageView) findViewById(R.id.img1);
+        img2 = (ImageView) findViewById(R.id.img2);
         String countryCode = getIntent().getStringExtra("country_code");
         if (!TextUtils.isEmpty(countryCode)) {
             ptimeText.setText("同步中..");
@@ -112,6 +117,10 @@ public class WeatherActivity extends Activity implements View.OnClickListener{
         temp1Text.setText(sharedPreferences.getString("temp1",""));
         temp2Text.setText(sharedPreferences.getString("temp2",""));
         weatherText.setText(sharedPreferences.getString("weather",""));
+        int img1ID= getResources().getIdentifier(sharedPreferences.getString("img1", ""), "drawable", "cherish.com.coolweather");
+        int img2ID= getResources().getIdentifier(sharedPreferences.getString("img2", ""), "drawable", "cherish.com.coolweather");
+        img1.setImageResource(img1ID);
+        img2.setImageResource(img2ID);
         weatherInfoLayout.setVisibility(View.VISIBLE);
         cityNameText.setVisibility(View.VISIBLE);
         Intent intent = new Intent(this, AutoUpdateService.class);

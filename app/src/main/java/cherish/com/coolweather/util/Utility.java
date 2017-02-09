@@ -87,7 +87,11 @@ public class Utility {
                 String temp2 = object.getString("temp2");
                 String weather = object.getString("weather");
                 String ptime = object.getString("ptime");
-                saveWeatherInfo(context,cityName,weatherCode,temp1,temp2,weather,ptime);
+                String[] imgs1 = object.getString("img1").split("\\.");
+                String[] imgs2 = object.getString("img2").split("\\.");
+                String img1 = imgs1[0];
+                String img2 = imgs2[0];;
+                saveWeatherInfo(context,cityName,weatherCode,temp1,temp2,weather,ptime,img1,img2);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -95,7 +99,8 @@ public class Utility {
 
     }
 
-    public static void saveWeatherInfo(Context context, String cityName, String weatherCode, String temp1, String temp2, String weather, String ptime) {
+    public static void saveWeatherInfo(Context context, String cityName, String weatherCode, String temp1, String temp2, String weather,
+                                       String ptime,String img1,String img2) {
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);
         editor.putBoolean("city_selected", true);
@@ -105,6 +110,8 @@ public class Utility {
         editor.putString("temp2", temp2);
         editor.putString("weather", weather);
         editor.putString("ptime", ptime);
+        editor.putString("img1", img1);
+        editor.putString("img2", img2);
         editor.putString("current_date", sdf.format(new Date()));
         editor.commit();
     }
